@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indian Knowledge System Quiz</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #f0f0f0; }
+    .quiz-container { max-width: 1000px; margin: auto; background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    h2 { color: #2c3e50; }
+    .question { margin-bottom: 20px; }
+    .options label { display: block; margin-bottom: 5px; }
+    button { margin-top: 20px; padding: 12px 24px; font-size: 16px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    .result { margin-top: 20px; font-weight: bold; font-size: 18px; color: #155724; }
+    button + button {
+        margin-left: 10px;
+        background-color: #6c757d;
+      }
+      button + button:hover {
+        background-color: #5a6268;
+      }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Indian Knowledge System Quiz (Questions 1–40)</h2>
+    <form id="quizForm"></form>
+    <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+    <button type="button" onclick="restartQuiz()">Restart Quiz</button>
+
+   
+      
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const questions = [
+      // Questions 1–20 (same as previous part)
+      { q: "India has been a land of great cultures since ancient times including…", options: ["Hinduism", "Jainism", "Buddhism", "All of these"], answer: 3 },
+      { q: "Bharatiya Knowledge System has been evident from the era of Harappan Civilization which was started from…", options: ["2600-1900 BCE", "3600-900 BCE", "6600-2900 BCE", "5600-3900 BCE"], answer: 0 },
+      { q: "Mohenjodaro in Sind province is now located in…", options: ["Bhutan", "Sri Lanka", "India", "Pakistan"], answer: 3 },
+      { q: "What is Pyrotechnology?", options: ["Crafts created using fire", "Crafts created without use of fire", "Crafts created using water and soil", "None of these"], answer: 0 },
+      { q: "What is the time period of colonial period in India?", options: ["From 1500 CE - 1747 CE", "From 1700 CE - 1947 CE", "From 1600 CE - 1847 CE", "None of these"], answer: 1 },
+      { q: "India has been a land of great cultures since ancient times including…", options: ["Hinduism", "Jainism", "Buddhism", "All of these"], answer: 3 },
+      { q: "……………………….. is the ultimate goal of human life, representing liberation from the cycle of birth and death.", options: ["Karma", "Maya", "Atman", "Moksha"], answer: 3 },
+      { q: "Shakuntala is dramatic literature written by…", options: ["Surdasa", "Kalidasa", "Tulsidasa", "Narottamdasa"], answer: 1 },
+      { q: "Ajanta and Ellora caves contain some of the finest examples of classical Indian painting, depicting scenes from the life of…", options: ["Hinduism", "Buddhism", "Both Hinduism and Buddhism", "Sikhism"], answer: 2 },
+      { q: "What is the time period of Vedic period in India?", options: ["From 1000 BCE - 500 BCE", "From 1500 BCE - 500 BCE", "From 2000 BCE - 1500 BCE", "All of these"], answer: 1 },
+      { q: "The illusionary nature of the world is also known as…", options: ["Karma", "Maya", "Atman", "Moksha"], answer: 1 },
+      { q: "The entire body of knowledge is divided into … sets in Mundakupanishad.", options: ["0", "1", "2", "3"], answer: 2 },
+      { q: "Aṣṭādhyāyī is a grammar book written by…", options: ["Aryabhatta", "Brahmgupta", "Panini", "None of these"], answer: 2 },
+      { q: "Sage Gautam is famous for his contribution about the scripture related to…", options: ["Vaisheshika", "Samkhya", "Nyaya", "None of these"], answer: 2 },
+      { q: "Who is known as the father of Vedanta?", options: ["Gautam", "Kanad", "Jamini", "Veda Vyas"], answer: 3 },
+      { q: "Philosophical study of being, existence, and reality is known as…", options: ["Phenology", "Oncology", "Ontology", "None of these"], answer: 2 },
+      { q: "In traditional knowledge of India, water and fire are known as … and … respectively.", options: ["Ap and Tejas", "Vayu and Tejas", "Tejas and Akasha", "All of these"], answer: 0 },
+      { q: "Mimamsa means…", options: ["Science education", "Art education", "Critical investigation", "Economics education"], answer: 2 },
+      { q: "Sage Patanjali has given the concept of…", options: ["Nyaya", "Yoga", "Vaisheshika", "None of these"], answer: 1 },
+      { q: "Apara Vidhya means…", options: ["Sanskrit", "The higher knowledge", "The lower knowledge", "All of these"], answer: 2 },
+
+      // Questions 21–40
+      { q: "Which one is famous for foundational principles governing health, disease, diagnosis, and treatment?", options: ["Vaisheshika", "Ayurveda", "Apara vidhya", "Para vidhaya"], answer: 1 },
+      { q: "What was the time period of Gupta script?", options: ["From 4th to 6th century CE", "From 6th to 8th century CE", "From 8th to 10th century CE", "From 10th to 12th century CE"], answer: 0 },
+      { q: "Isa is a type of ………..", options: ["Upanishads", "Puranas", "Grammar", "None of these"], answer: 0 },
+      { q: "How many Parvas are in Mahabharata?", options: ["18", "28", "38", "48"], answer: 0 },
+      { q: "Which ancient and sacred scriptures are known as the foundation of Hinduism?", options: ["Vedas", "Bhagvad Gita", "Ramayana", "Mahabharata"], answer: 0 },
+      { q: "In Hinduism, Yajna (Sacrifice) means", options: ["Emphasis on purity and precision", "Appeasing gods through rituals", "Prose mantras for rituals", "Explanation of rituals"], answer: 1 },
+      { q: "What are Agamas and Tantras?", options: ["Ethical guidelines", "Role of deities", "Religious/spiritual practices base", "None of these"], answer: 2 },
+      { q: "Music is originated from………..", options: ["Rk veda", "Yajur Veda", "Sama veda", "Atharva Veda"], answer: 2 },
+      { q: "The Vedas consist of ……. main collections.", options: ["2", "3", "4", "5"], answer: 2 },
+      { q: "Devanagari Script was developed in………century.", options: ["9th century CE", "8th century CE", "7th century CE", "6th century CE"], answer: 2 },
+      { q: "Which one refers to the concise and aphoristic style of writing?", options: ["Karma", "Darshana", "Tantras", "Sutras"], answer: 3 },
+      { q: "In which ancient scripture are social customs and ethics mentioned?", options: ["Smritis", "Sutras", "Puranas", "Gita"], answer: 0 },
+      { q: "Tripitaka scripture is related to………..", options: ["Hinduism", "Jainism", "Buddhism", "Sikkhism"], answer: 2 },
+      { q: "Which one comprises translations of Buddha's teachings into Tibetan?", options: ["Kangyur", "Smritis", "Sutras", "None of these"], answer: 0 },
+      { q: "Which one is the oldest veda?", options: ["Rk veda", "Yajur Veda", "Sama veda", "Atharva Veda"], answer: 0 },
+      { q: "Which one is the sacred scripture of Jainism?", options: ["Upanishads", "Agamas", "Puranas", "Mahayana"], answer: 1 },
+      { q: "In ancient India, education was provided in residential schools called………..", options: ["Akhadas", "Sarayas", "Gurukulas", "Mathas"], answer: 2 },
+      { q: "Breathing exercises are also known as…", options: ["Pranayama", "Asanas", "Chintan", "Manan"], answer: 0 },
+      { q: "Which place was famous for meditation and learning from a guru?", options: ["Mathas", "Gurukulas", "Viharas", "Ashramas"], answer: 3 },
+      { q: "Mahayana Sutras are the …............scriptures.", options: ["Hindu", "Jain", "Sikkh", "Buddhist"], answer: 3 },
+      { q: "Which one is known as 5th veda Hinduism?", options: ["Vedas", "Mahabharat", "Ramayana", "Bhagvad Gita"], answer: 1 },
+      { q: "Charaka and Kautilya were the alumni of ...........?", options: ["Takshshila", "Nalanda", "Vikramshila", "Vallabhi"], answer: 0 },
+      { q: "The golden period of Nalanda University was in between……………………………", options: ["5th century CE and 12th century CE", "7th century CE and 11th century CE", "8th century CE and 15th century CE", "9th century CE and 10th century CE"], answer: 0 },
+        { q: "Vallabhi was a great center of learning which is located in the state of…...............", options: ["Bihar", "Gujarat", "Madhya Pradesh", "Punjab"], answer: 1 },
+        { q: "Ether is among…………………", options: ["Five elements", "Siksha", "Darshana", "None of these"], answer: 0 },
+        { q: "Total how many Nakshatras are mentioned in the ancient literatures?", options: ["8", "18", "23", "28"], answer: 3 },
+        { q: "Vedanga-Jyotisha was composed in……….", options: ["1000 BCE", "1100 BCE", "1200 BCE", "1300 BCE"], answer: 3 },
+        { q: "Yajnopavita is related to…………………", options: ["Upnayana", "Grihstha", "Vanprastha", "None of these"], answer: 0 },
+        { q: "Arthashastra was written by…………", options: ["Aryabhatta", "Kautilya", "Panini", "Brahmgupta"], answer: 1 },
+        { q: "In which state, ancient Vikramshila University was located?", options: ["Uttar Pradesh", "Gujarat", "Madhya Pradesh", "Bihar"], answer: 3 },
+        { q: "What was the period of Aryabhata?", options: ["376–440 CE", "476–550 CE", "526–560 CE", "396–510 CE"], answer: 1 },
+{ q: "Siddhanta Shiromani is written by………..", options: ["Brahgupta", "Aryabhatta", "Bhaskara", "Kautilya"], answer: 2 },
+{ q: "Who gave Heliocentric model of the solar system?", options: ["Aryabhatta", "Brahgupta", "Bhaskara", "Kautilya"], answer: 0 },
+{ q: "The Indian calendar often integrates……...", options: ["Only stars", "Only Lunar element", "Only Solar element", "Both lunar and solar elements"], answer: 3 },
+{ q: "How many ritus are there as The Indian calendar?", options: ["4", "6", "8", "10"], answer: 1 },
+{ q: "Which ancient Indian text describes mining and metallurgical techniques?", options: ["Rigveda", "Arthashastra", "Charaka Samhita", "Natya Shastra"], answer: 1 },
+{ q: "What was the primary fuel used for smelting metals in ancient India?", options: ["Coal", "Charcoal", "Cow dung", "Wood"], answer: 1 },
+{ q: "Which metal was extensively used in ancient India for making idols using the lost-wax technique?", options: ["Bronze", "Iron", "Zinc", "Copper"], answer: 0 },
+{ q: "What was the primary purpose of 'Kupya' in ancient Indian metallurgy?", options: ["A type of furnace", "A crucible for melting metals", "A bellow for air supply", "A hammer for forging"], answer: 2 },
+{ q: "Which of the following was NOT an alloy developed in ancient India?", options: ["Brass", "Bronze", "Stainless steel", "Pewter"], answer: 2 },
+{ q: "The famous Iron Pillar of Delhi is made up of which material?", options: ["Wrought Iron", "Cast Iron", "High-carbon steel", "Pure Iron"], answer: 0 },
+{ q: "Which ancient Indian metallurgist is known for advancements in iron smelting?", options: ["Nagarjuna", "Sushruta", "Varahamihira", "Patanjali"], answer: 0 },
+{ q: "Which of the following is a unique contribution of Indian Mathematics?", options: ["Calculus", "Complex Numbers", "Pythagorean Theorem", "Decimal System with Zero"], answer: 3 },
+{ q: "Which Indian mathematician introduced the concept of negative numbers?", options: ["Bhaskara II", "Brahmagupta", "Aryabhata", "Varahamihira"], answer: 1 },
+{ q: "The 'Pingala's Chandah Sāstra' is associated with which mathematical concept?", options: ["Magic Squares", "Binary Numbers", "Trigonometry", "Algebra"], answer: 1 },
+{ q: "What is the unique feature of Indian trigonometry compared to Greek trigonometry?", options: ["Use of Sine (Jya) function", "Use of Angles", "Use of Tangents", "Use of Radians"], answer: 0 },
+{ q: "Which ancient Indian text contains the earliest known discussion of permutations and combinations?", options: ["Lilavati", "Yuktibhāṣā", "Chandah Sāstra", "Siddhanta Shiromani"], answer: 2 },
+{ q: "Which ancient Indian text is considered the most authoritative work on military strategy and statecraft?", options: ["Manusmriti", "Mahabharata", "Rigveda", "Arthashastra"], answer: 3 },
+{ q: "Who is regarded as the ancient Indian scholar who systematized military science and warfare strategies?", options: ["Chanakya", "Aryabhata", "Patanjali", "Panini"], answer: 0 },
+{ q: "What was the primary focus of military training in ancient India as described in the Arthashastra?", options: ["Physical strength only", "Archery and Swordsmanship", "Espionage and psychological warfare", "Combined in weapons, strategy, and discipline"], answer: 3 },
+{ q: "Which ancient Indian kingdom was particularly known for its advanced military formations like the 'Chakravyuha'?", options: ["Maurya Empire", "Gupta Empire", "Magadha", "Mahajanapadas"], answer: 3 },
+{ q: "What was the primary purpose of Niyuddha Kala in ancient India?", options: ["Entertainment", "Military combat and self-defense", "Religious rituals", "Agricultural training"], answer: 1 },
+{ q: "Which ancient Indian text describes Niyuddha techniques and combat strategies?", options: ["Arthashastra", "Natya Shastra", "Manusmriti", "Agni Purana"], answer: 3 },
+{ q: "Which warrior-sage is traditionally associated with the origin of Niyuddha in Indian culture?", options: ["Dronacharya", "Parshuram", "Bhishma", "Karna"], answer: 1 },
+{ q: "Which of the following was a key principle of Niyuddha Kala?", options: ["Use of only long-range weapons", "Strict non-violence", "Discipline, ethics, and physical prowess", "Focus on magical powers"], answer: 2 },
+{ q: "Which Vedic concept represents the deification and sacredness of nature?", options: ["Yajna", "Pradushana", "Devata", "Prakriti"], answer: 2 },
+{ q: "In Vedic tradition, what does the term 'Prithvi' signify?", options: ["Goddess of Water", "Mother Earth", "God of Fire", "Divine Air"], answer: 1 },
+{ q: "Which Vedic practice reflects environmental conservation through ritual offerings?", options: ["Tapasya", "Yajna", "Dhyana", "Puja"], answer: 1 },
+{ q: "Which Vedic text emphasizes the interconnectedness of all natural elements?", options: ["Rigveda", "Atharvaveda", "Samaveda", "Yajurveda"], answer: 1 },
+{ q: "The \"Paradigm Shift\" through IKS emphasizes:", options: ["Blending ancient wisdom with modern scientific methods", "Rejecting technological advancements", "Exclusively using Sanskrit terminology", "Reviving outdated practices without modification"], answer: 0 },
+{ q: "According to Bhartrhari, what is the indivisible unit of linguistic communication?", options: ["Word", "Phoneme", "Sentence", "Meaning"], answer: 2 },
+{ q: "The \"Vigyan Jyoti\" program encourages girls to pursue STEM fields by:", options: ["Teaching Vedic mathematics exclusively", "Combining traditional Indian sciences with modern STEM", "Focusing only on space technology", "Ignoring IKS completely"], answer: 1 },
+{ q: "Bhartrhari's view that language and reality are inseparable aligns with which concept?", options: ["Šabda-pramana", "Yajna", "Pradushana", "Karma"], answer: 0 },
+{ q: "Which of the following is a key strategy to integrate IKS into modern education?", options: ["Incorporate traditional texts in STEM curricula", "Replace Western science entirely", "Limit IKS to history courses", "Ignore contemporary applications"], answer: 0 },
+{ q: "In Panini's *Aşıdahydyr*, what is the primary mechanism for generating grammatical rules?", options: ["Random word lists", "Sutras with recursive operations", "Pictorial representation", "Oral traditions only"], answer: 1 },
+{ q: "Which of the following is a focus area of the IKS Division established under the Ministry of Education?", options: ["Preserving ancient manuscripts only", "Promoting only Ayurveda in schools", "Integrating IKS into mainstream education and research", "Translating all texts into English"], answer: 2 },
+{ q: "How does IKS contribute to environmental sustainability today?", options: ["Adapting ancient water management to modern ecology", "By reviving outdated farming tools", "Banning all industrial development", "Using only organic pesticides"], answer: 0 },
+{ q: "What makes Sanskrit uniquely suited for Natural Language Processing (NLP)?", options: ["Its ancient religious status", "Simple vocabulary", "Large number of speakers today", "Highly structured, rule-based grammar"], answer: 3 },
+{ q: "What is the primary purpose of *Chandas* (prosody) in ancient Indian literature?", options: ["Decorative wordplay", "Structural framework for poetic composition", "Religious rituals only", "Musical notation"], answer: 1 },
+{ q: "Which Vedic text is the earliest known source for the study of Chandas?", options: ["Rigveda", "Yajurveda", "Chandogya Upanishad", "Natya Shastra"], answer: 0 },
+{ q: "In prosody, a *Guru* (heavy syllable) is defined by:", options: ["Sacred meaning", "High pitch", "Length", "Position in the stanza"], answer: 2 },
+{ q: "What was the primary function of *Gana* (mnemonic syllables) in Sanskrit prosody?", options: ["To memorize Vedic hymns", "To classify poetic metres", "To teach grammar rules", "To compose musical notes"], answer: 1 },
+{ q: "Which of these is NOT one of the \"seven birds\" (major Sanskrit metres)?", options: ["Anusũubh", "Triştubh", "Jagati", "Kayya"], answer: 3 },
+{ q: "How did metres contribute to literary architecture in ancient India?", options: ["By standardizing emotional expression", "By providing rigid rhythmic frameworks for poetry", "By replacing grammatical rules", "Limiting creative freedom"], answer: 1 },
+{ q: "According to the Vedic model, how many levels (koshas) of consciousness are described?", options: ["3", "6", "5", "12"], answer: 2 },
+{ q: "The ancient Indian theory of speech (Vak) and cognition is primarily explored in which text?", options: ["Patanjali's Yoga Sutras", "Charaka Samhita", "Nyaya Sutras", "Mandukya Upanishad"], answer: 3 },
+{ q: "Which governmental initiative promotes IKS in current research and policy?", options: ["AYUSH Mission", "Digital India", "Make in India", "Swachh Bharat"], answer: 0 },
+{ q: "Which ancient Indian text explicitly mentions Anviksiki as one of the four vital vidyas for statecraft?", options: ["Manusmriti", "Arthashastra", "Rigveda", "Natya Shastra"], answer: 1 },
+{ q: "The term Anviksiki primarily refers to:", options: ["Military strategy", "Agricultural techniques", "Poetic composition", "Logical and philosophical reasoning"], answer: 3 },
+{ q: "Rajadharma in ancient Indian polity primarily emphasized:", options: ["Military conquests", "Duties and ethical responsibilities of a ruler", "Trade regulations", "Religious rituals"], answer: 1 },
+
+    ];
+
+    const form = document.getElementById("quizForm");
+
+  questions.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    div.id = `q${index}`;
+    div.innerHTML = `<p><strong>Q${index + 1}. ${item.q}</strong></p>`;
+    item.options.forEach((opt, i) => {
+      div.innerHTML += `
+        <div class="options">
+          <label>
+            <input type="radio" name="q${index}" value="${i}"> ${opt}
+          </label>
+        </div>`;
+    });
+    form.appendChild(div);
+  });
+
+  function submitQuiz() {
+    let score = 0;
+    questions.forEach((q, i) => {
+      const selected = document.querySelector(`input[name="q${i}"]:checked`);
+      const questionDiv = document.getElementById(`q${i}`);
+      const correctAnswerText = q.options[q.answer];
+
+      let feedback = document.createElement("div");
+      feedback.style.marginTop = "5px";
+
+      if (selected) {
+        const userAnswer = parseInt(selected.value);
+        if (userAnswer === q.answer) {
+          score++;
+          feedback.innerHTML = `<span style="color: green;">✔ Correct</span>`;
+        } else {
+          feedback.innerHTML = `<span style="color: red;">✘ Incorrect. Correct answer: <strong>${correctAnswerText}</strong></span>`;
+        }
+      } else {
+        feedback.innerHTML = `<span style="color: red;">✘ Not Answered. Correct answer: <strong>${correctAnswerText}</strong></span>`;
+      }
+
+      questionDiv.appendChild(feedback);
+    });
+
+    document.getElementById("result").innerText = `✅ You scored ${score} out of ${questions.length}.`;
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+  }
+  function restartQuiz() {
+  // Clear previous result
+  document.getElementById("result").innerText = "";
+
+  // Clear existing form content
+  form.innerHTML = "";
+
+  // Rebuild the quiz
+  questions.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "question";
+    div.id = `q${index}`;
+    div.innerHTML = `<p><strong>Q${index + 1}. ${item.q}</strong></p>`;
+    item.options.forEach((opt, i) => {
+      div.innerHTML += `
+        <div class="options">
+          <label>
+            <input type="radio" name="q${index}" value="${i}"> ${opt}
+          </label>
+        </div>`;
+    });
+    form.appendChild(div);
+  });
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+  </script>
+</body>
+</html>
